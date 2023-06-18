@@ -49,10 +49,6 @@ const providers = [
     { id: 3, name: 'Proveedor C', location: 'Kyoto' }
 ];
 
-app.use((req, res)=>{
-    res.status(404).send('No se encontro tu pagina... que Tiste')
-})
-
 
 // Consulta 1: Obtener información de todos los productos
 app.get('/products', (req, res) => {
@@ -110,6 +106,12 @@ app.put('/products/:id/suggestedPrice', (req, res) => {
 app.get('/providers', (req, res) => {
     res.json(providers);
   });
+
+
+
+app.use((req, res)=>{
+    res.status(404).send('No se encontro tu pagina... que Tiste')
+})
 
 app.listen(port, () => {
   console.log(`Servidor en ejecución en http://localhost:${port}`);
