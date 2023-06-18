@@ -3,6 +3,9 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors()); // Configurar CORS
+
+
 // Simulación de datos
 const products = [
   { id: 1, nombre: 'Pikachu Gomoku Ramen', precioEspecial: 380, precioSugerido: 430 },
@@ -49,8 +52,6 @@ const providers = [
 app.use((req, res)=>{
     res.status(404).send('No se encontro tu pagina... que Tiste')
 })
-
-app.use(cors());
 
 
 // Consulta 1: Obtener información de todos los productos
