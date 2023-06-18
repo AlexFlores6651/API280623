@@ -79,9 +79,9 @@ app.get('/products/suggestedPrice/:value', (req, res) => {
 app.post('/products', (req, res) => {
   const newProduct = {
     id: products.length + 1,
-    nombre: 'Nuevo Producto',
-    precioEspecial: 0,
-    precioSugerido: 0
+    nombre: req.body.nombre || 'Nuevo Producto',
+    precioEspecial: req.body.precioEspecial || 0,
+    precioSugerido: req.body.precioSugerido || 0
   };
 
   products.push(newProduct);
