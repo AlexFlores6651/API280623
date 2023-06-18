@@ -50,6 +50,9 @@ app.use((req, res)=>{
     res.status(404).send('No se encontro tu pagina... que Tiste')
 })
 
+app.use(cors());
+
+
 // Consulta 1: Obtener información de todos los productos
 app.get('/products', (req, res) => {
   res.json(products);
