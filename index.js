@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
+const https = require('https');
 
 app.use(cors()); // Configurar CORS
 
@@ -107,6 +108,35 @@ app.get('/providers', (req, res) => {
     res.json(providers);
   });
 
+//.................................................................................................
+// CONSULTA API QR..................................................................
+// .............................................................................
+
+app.get('/qr/:i', (req,response) =>{
+  let json;
+  https.get(`https://kitsu.io/api/edge/anime/${req.params.i}`, (res) => {
+    let body = "";
+
+    res.on("data", (chunk) => {
+        body += chunk;
+    });
+
+    res.on("end", () => {
+        try {
+            json = JSON.parse(body);
+            response.send(json.data.attributes.canonicalTitle)
+        } catch (error) {
+            console.error(error.message);
+        };
+    });
+  }).on("error", (error) => {
+      console.error(error.message);
+  });
+});
+
+
+//...............................................................
+//...............................................................
 
 
 app.use((req, res)=>{
